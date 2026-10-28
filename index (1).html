@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DNC Motors | Showroom Mobil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@300;400;600&display=swap">
+<style>
+:root{--gold:#d4af37;--gold-soft:#f5d77a;--dark:#0b0b0f;--dark-2:#15151c;--red:#e10600}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--dark);color:#eee;font-family:'Poppins',system-ui,sans-serif}
+h1,h2,h3{font-family:'Oswald',Impact,sans-serif;letter-spacing:1px;text-transform:uppercase;margin:0}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 5%;
+  background:rgba(11,11,15,.6);backdrop-filter:blur(10px);transition:.3s}
+nav.scrolled{background:rgba(11,11,15,.95);box-shadow:0 4px 25px rgba(212,175,55,.2)}
+.logo{font-family:'Oswald',sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:3px;text-decoration:none}
+.links{display:flex;gap:1.6rem}
+.links a{position:relative;color:#fff;text-decoration:none;font-size:.9rem;transition:color .3s}
+.links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--gold);transition:width .3s}
+.links a:hover{color:var(--gold)}.links a:hover::after{width:100%}
+
+.hero{position:relative;min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:2rem 5%;overflow:hidden;
+  background:radial-gradient(circle at 75% 30%,rgba(225,6,0,.35),transparent 45%),radial-gradient(circle at 20% 80%,rgba(212,175,55,.22),transparent 45%),var(--dark)}
+.hero::before{content:"";position:absolute;inset:-50%;background:repeating-linear-gradient(115deg,transparent 0 60px,rgba(255,255,255,.035) 60px 62px);animation:drift 12s linear infinite}
+@keyframes drift{to{transform:translateX(124px)}}
+.hero>*{position:relative;z-index:1}
+.hero small{color:var(--gold);letter-spacing:6px;text-transform:uppercase}
+.hero h1{font-size:clamp(2.4rem,7vw,5rem);margin:1rem 0;line-height:1.05;
+  background:linear-gradient(90deg,#fff,var(--gold-soft),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:520px;color:#bbb;font-weight:300}
+
+.btn{position:relative;overflow:hidden;display:inline-block;border:1px solid var(--gold);background:transparent;color:var(--gold);
+  padding:.8rem 2rem;margin-top:1.6rem;font:600 .9rem 'Poppins',sans-serif;letter-spacing:1px;text-decoration:none;cursor:pointer;transition:.3s}
+.btn::before{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg)}
+.btn:hover{background:var(--gold);color:#000;box-shadow:0 0 22px rgba(212,175,55,.6)}
+.btn:hover::before{left:140%;transition:.7s}
+
+#koleksi{padding:4rem 5%}
+#koleksi h2{font-size:2rem;color:var(--gold-soft)}
+.tools{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin:1.5rem 0 .6rem}
+.tools input,.tools select{background:var(--dark-2);color:#eee;border:1px solid rgba(212,175,55,.3);border-radius:8px;padding:.6rem .9rem;font:400 .9rem 'Poppins',sans-serif}
+.tools input{flex:1 1 220px}
+.tools label{display:flex;align-items:center;gap:.4rem;font-size:.9rem;color:#ccc}
+.tools input[type=checkbox]{flex:none;accent-color:var(--gold)}
+.tools .btn{margin:0;padding:.55rem 1.3rem}
+#hitung{color:#999;font-size:.85rem;margin:0 0 1.2rem}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.5rem}
+.msg{grid-column:1/-1;color:#aaa;padding:2rem 0}
+
+.card{background:var(--dark-2);border:1px solid rgba(212,175,55,.15);border-radius:14px;overflow:hidden;
+  opacity:0;transform:translateY(40px);transition:opacity .8s,transform .25s ease,box-shadow .3s,border-color .3s}
+.card.show{opacity:1;transform:none}
+.card:hover{border-color:var(--gold);box-shadow:0 15px 40px rgba(212,175,55,.25)}
+.img{position:relative;overflow:hidden;height:190px;background:#1d1d26;cursor:pointer}
+.img:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.card:hover .img img{transform:scale(1.08)}
+.badge{position:absolute;top:12px;right:12px;padding:.25rem .8rem;border-radius:20px;font-size:.75rem;font-weight:600;background:var(--gold);color:#000}
+.card.sold .img img{filter:grayscale(1) brightness(.6)}
+.card.sold .badge{background:var(--red);color:#fff}
+.body{padding:1rem 1.2rem 1.4rem}
+.body small{color:var(--gold);letter-spacing:1px;text-transform:uppercase}
+.body h3{margin:.4rem 0;font-size:1.05rem}
+.body p{color:#aaa;margin:0 0 .6rem;font-size:.9rem}
+.body strong{color:var(--gold-soft);font-size:1.15rem}
+
+/* Modal detail */
+body:has(dialog[open]){overflow:hidden}
+dialog{width:min(560px,92vw);max-height:90vh;padding:0;border:1px solid var(--gold);border-radius:16px;
+  background:var(--dark-2);color:#eee;overflow:auto;box-shadow:0 20px 70px rgba(212,175,55,.3)}
+dialog::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(4px)}
+dialog[open]{animation:muncul .3s ease}
+@keyframes muncul{from{opacity:0;transform:translateY(20px) scale(.97)}}
+.m-wrap{position:relative}
+.m-close{position:absolute;top:10px;left:10px;z-index:2;width:36px;height:36px;border:0;border-radius:50%;
+  background:rgba(0,0,0,.6);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;transition:.3s}
+.m-close:hover{background:var(--gold);color:#000}
+.m-img{position:relative;height:280px;background:#1d1d26}
+.m-img img{width:100%;height:100%;object-fit:cover;display:block}
+.m-img .badge{top:12px;right:12px}
+.m-img.sold img{filter:grayscale(1) brightness(.6)}
+.m-img.sold .badge{background:var(--red);color:#fff}
+.m-body{padding:1.2rem 1.5rem 1.6rem}
+.m-body small{color:var(--gold);letter-spacing:1px;text-transform:uppercase}
+.m-body h3{margin:.4rem 0;font-size:1.5rem}
+.m-body strong{color:var(--gold-soft);font-size:1.4rem}
+dl{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem 1rem;margin:1.2rem 0 0}
+dl div{padding:.7rem .9rem;border:1px solid rgba(212,175,55,.2);border-radius:8px}
+dt{font-size:.75rem;color:#999;text-transform:uppercase;letter-spacing:1px}
+dd{margin:.2rem 0 0;font-size:.95rem}
+.m-body .btn{display:block;text-align:center;margin-top:1.4rem}
+
+/* Kontak */
+#kontak{padding:4rem 5%;text-align:center;border-top:1px solid rgba(212,175,55,.15)}
+#kontak h2{font-size:2rem;color:var(--gold-soft)}
+#kontak p{color:#aaa;margin:.8rem 0 0}
+.kontak{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.btn.wa{border-color:#25d366;color:#25d366}
+.btn.wa:hover{background:#25d366;color:#000;box-shadow:0 0 22px rgba(37,211,102,.6)}
+
+footer{padding:2rem 5%;text-align:center;color:#777;font-size:.85rem;border-top:1px solid rgba(212,175,55,.15)}
+@media(max-width:600px){.links{display:none}}
+@media(prefers-reduced-motion:reduce){.hero::before{animation:none}.card{transition:none;opacity:1;transform:none}html{scroll-behavior:auto}dialog[open]{animation:none}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a class="logo" href="#">MF MOTORS</a>
+  <div class="links"><a href="#">Beranda</a><a href="#koleksi">Koleksi</a><a href="#kontak">Kontak</a></div>
+</nav>
+
+<header class="hero">
+  <small>Premium Showroom</small>
+  <h1>Drive The<br>Extraordinary</h1>
+  <p>Koleksi mobil pilihan dengan performa tinggi dan kenyamanan kelas atas.</p>
+  <a href="#koleksi" class="btn">Lihat Koleksi</a>
+</header>
+
+<section id="koleksi">
+  <h2>Koleksi Unggulan</h2>
+  <div class="tools">
+    <input id="cari" type="search" placeholder="Cari nama atau merek" aria-label="Cari nama atau merek">
+    <select id="fBrand" aria-label="Merek"></select>
+    <select id="fTrans" aria-label="Transmisi"></select>
+    <select id="fBbm" aria-label="Bahan bakar"></select>
+    <select id="urut" aria-label="Urutkan">
+      <option value="baru">Terbaru</option>
+      <option value="murah">Harga termurah</option>
+      <option value="mahal">Harga termahal</option>
+      <option value="tahun">Tahun terbaru</option>
+    </select>
+    <label><input id="fSedia" type="checkbox"> Hanya yang tersedia</label>
+    <button id="reset" class="btn" type="button">Reset</button>
+  </div>
+  <p id="hitung"></p>
+  <div id="grid"><p class="msg">Memuat unit terbaru...</p></div>
+</section>
+
+<section id="kontak">
+  <h2>Hubungi Kami</h2>
+  <p>Tertarik dengan salah satu unit? Tim kami siap membantu.</p>
+  <div class="kontak">
+    <a id="kEmail" class="btn" href="#">&#9993; Email: MF Showroom</a>
+    <a id="kWa" class="btn wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</section>
+
+<dialog id="modal" aria-labelledby="mNama">
+  <div class="m-wrap">
+    <button type="button" class="m-close" id="mTutup" aria-label="Tutup">&times;</button>
+    <div class="m-img" id="mImg">
+      <img id="mFoto" alt="">
+      <span class="badge" id="mBadge"></span>
+    </div>
+    <div class="m-body">
+      <small id="mMerek"></small>
+      <h3 id="mNama"></h3>
+      <strong id="mHarga"></strong>
+      <dl id="mSpek"></dl>
+      <a id="mWa" class="btn wa" href="#" target="_blank" rel="noopener">Tanya via WhatsApp</a>
+    </div>
+  </div>
+</dialog>
+
+<footer>&copy; MF Showroom Mobil</footer>
+
+<script>
+const API = 'https://api-web.dnccudinus.org/api/mobil';
+const $ = id => document.getElementById(id);
+const rp = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tgl = s => s ? new Date(s).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '-';
+let data = [];
+
+/* Kontak (nilai contoh, ganti dengan data asli nanti) */
+const WA_NOMOR = '62800000000';   // format: 62 + nomor tanpa 0 di depan
+const EMAIL = 'MF Showroom@gmail.com';
+const waLink = teks => `https://wa.me/${WA_NOMOR}?text=${encodeURIComponent(teks)}`;
+$('kEmail').href = `mailto:${EMAIL}?subject=${encodeURIComponent('Tanya unit - MF Showroom')}`;
+$('kWa').href = waLink('Halo MF Showroom, saya ingin bertanya tentang unit mobil.');
+
+/* Navbar */
+addEventListener('scroll', () => $('nav').classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+/* Animasi muncul saat scroll */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+}), { threshold: .12 });
+
+/* Efek miring 3D pada kartu */
+document.addEventListener('mousemove', e => {
+  const c = e.target.closest('.card'); if (!c) return;
+  const r = c.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+  c.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-6px)`;
+});
+document.addEventListener('mouseout', e => {
+  const c = e.target.closest('.card');
+  if (c && !c.contains(e.relatedTarget)) c.style.transform = '';
+});
+
+/* Isi pilihan filter dari data */
+const isiPilihan = (id, label, key) => {
+  const nilai = [...new Set(data.map(m => m[key]).filter(Boolean))].sort();
+  $(id).innerHTML = `<option value="">${label}</option>` + nilai.map(v => `<option>${esc(v)}</option>`).join('');
+};
+
+/* Saring, urutkan, tampilkan */
+function render() {
+  const q = $('cari').value.trim().toLowerCase();
+  let hasil = data.filter(m =>
+    (!q || `${m.nama} ${m.brand}`.toLowerCase().includes(q)) &&
+    (!$('fBrand').value || m.brand === $('fBrand').value) &&
+    (!$('fTrans').value || m.transmisi === $('fTrans').value) &&
+    (!$('fBbm').value || m.bahan_bakar === $('fBbm').value) &&
+    (!$('fSedia').checked || m.status === 'tersedia'));
+
+  const urut = { baru: (a, b) => b.id - a.id, murah: (a, b) => a.harga - b.harga,
+                 mahal: (a, b) => b.harga - a.harga, tahun: (a, b) => b.tahun - a.tahun }[$('urut').value];
+  hasil.sort(urut);
+
+  $('hitung').textContent = `${hasil.length} unit ditemukan`;
+  $('grid').innerHTML = hasil.length ? hasil.map(m => `
+    <article class="card ${m.status === 'sold' ? 'sold' : ''}">
+      <div class="img" role="button" tabindex="0" data-id="${esc(m.id)}" aria-label="Lihat detail ${esc(m.nama)}">
+        <img src="${esc(m.foto)}" alt="${esc(m.nama)}" loading="lazy" onerror="this.style.display='none'">
+        <span class="badge">${m.status === 'sold' ? 'Terjual' : 'Tersedia'}</span>
+      </div>
+      <div class="body">
+        <small>${esc(m.brand)} • ${esc(m.tahun)}</small>
+        <h3>${esc(m.nama)}</h3>
+        <p>${esc(m.transmisi)} • ${esc(m.bahan_bakar)}</p>
+        <strong>${rp(m.harga)}</strong>
+      </div>
+    </article>`).join('')
+    : '<p class="msg">Tidak ada mobil yang cocok. Ubah atau reset filter.</p>';
+  $('grid').querySelectorAll('.card').forEach(el => io.observe(el));
+}
+
+['cari', 'fBrand', 'fTrans', 'fBbm', 'urut', 'fSedia'].forEach(id => $(id).addEventListener(id === 'cari' ? 'input' : 'change', render));
+$('reset').onclick = () => {
+  ['cari', 'fBrand', 'fTrans', 'fBbm'].forEach(id => $(id).value = '');
+  $('urut').value = 'baru'; $('fSedia').checked = false; render();
+};
+
+/* Modal detail mobil */
+const modal = $('modal');
+
+function bukaDetail(id) {
+  const m = data.find(x => String(x.id) === String(id));
+  if (!m) return;
+  const sold = m.status === 'sold';
+
+  $('mFoto').src = m.foto || ''; $('mFoto').alt = m.nama;
+  $('mFoto').style.display = '';
+  $('mFoto').onerror = function () { this.style.display = 'none'; };
+  $('mBadge').textContent = sold ? 'Terjual' : 'Tersedia';
+  $('mImg').classList.toggle('sold', sold);
+  $('mMerek').textContent = `${m.brand ?? ''} • ${m.tahun ?? ''}`;
+  $('mNama').textContent = m.nama;
+  $('mHarga').textContent = rp(m.harga);
+
+  const spek = [
+    ['Merek', m.brand], ['Tahun', m.tahun],
+    ['Transmisi', m.transmisi], ['Bahan bakar', m.bahan_bakar],
+    ['Status', sold ? 'Terjual' : 'Tersedia'], ['Ditambahkan', tgl(m.created_at)]
+  ];
+  $('mSpek').innerHTML = spek.map(([k, v]) =>
+    `<div><dt>${esc(k)}</dt><dd>${esc(v ?? '-')}</dd></div>`).join('');
+
+  $('mWa').href = waLink(`Halo MF Showroom, saya tertarik dengan ${m.nama} (${m.tahun}) harga ${rp(m.harga)}. Apakah masih tersedia?`);
+  modal.showModal();
+}
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('.img[data-id]');
+  if (el) bukaDetail(el.dataset.id);
+});
+document.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.img[data-id]')) {
+    e.preventDefault(); bukaDetail(e.target.dataset.id);
+  }
+});
+$('mTutup').onclick = () => modal.close();
+modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+
+/* Ambil data dari API */
+(async () => {
+  try {
+    const res = await fetch(API);
+    if (!res.ok) throw new Error(res.status);
+    data = (await res.json()).data || [];
+    isiPilihan('fBrand', 'Semua merek', 'brand');
+    isiPilihan('fTrans', 'Semua transmisi', 'transmisi');
+    isiPilihan('fBbm', 'Semua bahan bakar', 'bahan_bakar');
+    render();
+  } catch {
+    $('grid').innerHTML = '<p class="msg">Data mobil gagal dimuat. Periksa koneksi internet lalu muat ulang halaman.</p>';
+  }
+})();
+</script>
+</body>
+</html>

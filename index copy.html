@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome To Our Showroom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <strong class="logo">MF Showroom</strong>
+    <a class="btn small" id="waTop" target="_blank" rel="noopener">Hubungi kami</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Mobil pilihan, siap dibawa pulang</h1>
+      <p id="heroSub">Memuat unit terbaru...</p>
+      <button class="btn light" id="heroBtn" type="button" hidden>Lihat unit terbaru</button>
+    </div>
+    <figure class="hero-img" id="heroImg" hidden>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+  </section>
+
+  <main>
+    <form class="filters" id="filters">
+      <input type="search" name="q" placeholder="Cari nama atau merek" aria-label="Cari mobil">
+      <select name="brand" aria-label="Merek"><option value="">Semua merek</option></select>
+      <select name="transmisi" aria-label="Transmisi"><option value="">Semua transmisi</option></select>
+      <select name="bahan_bakar" aria-label="Bahan bakar"><option value="">Semua bahan bakar</option></select>
+      <select name="urut" aria-label="Urutkan">
+        <option value="baru">Terbaru</option>
+        <option value="murah">Harga terendah</option>
+        <option value="mahal">Harga tertinggi</option>
+        <option value="tahun">Tahun terbaru</option>
+      </select>
+      <label class="check"><input type="checkbox" name="tersedia"> Hanya yang tersedia</label>
+      <button class="btn ghost small" type="reset">Reset</button>
+    </form>
+
+    <p class="info" id="info" aria-live="polite"></p>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer>&copy; 2026 Showroom Mobil</footer>
+
+  <dialog id="modal"></dialog>
+  <script src="script.js"></script>
+</body>
+</html>
+<header class="sl-hero">
+  <small>Premium Showroom</small>
+  <h1>Drive The<br>Extraordinary</h1>
+  <p>Koleksi mobil pilihan dengan performa tinggi dan kenyamanan kelas atas.</p>
+  <a href="#sl-koleksi" class="sl-btn">Lihat Koleksi</a>
+</header>
+
+<section id="sl-koleksi">
+  <h2>Koleksi Unggulan</h2>
+  <div id="sl-filter"></div>
+  <div id="sl-grid"></div>
+</section>
